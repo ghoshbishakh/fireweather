@@ -1,0 +1,40 @@
+<!DOCTYPE>
+<html>
+
+<title> Weather </title>
+
+<head>
+    
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="handler.js"></script>
+
+<script>
+    function begin(){
+       getWeather();       
+    };
+    
+    function refresh() {
+        
+    $('h2').html('Location Name: ' + weather.location.name +  
+                 ' Temperature: ' + weather.temperature.main
+                 
+                 );    
+        
+        
+    };
+    
+</script>
+
+  
+</head>
+
+
+<body>
+<h1>Weather App </h1>
+<h2>Click Get Weather</h2>    
+<button onclick="begin()">Get Weather</button>
+
+</body>
+</html>
+
+
