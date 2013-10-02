@@ -4,7 +4,7 @@
 <title> Weather </title>
 
 <head>
-    
+<link rel="stylesheet" type="text/css" href="main.css">    
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript" src="handler.js"></script>
 
@@ -15,8 +15,10 @@
     
     function refresh() {
         
-    $('h2').html('Location Name: ' + weather.location.name + '</br>' + 
-                 ' Temperature: ' + weather.temperature.main
+    $("#content").html('Location Name: ' + weather.location.name + '</br>' + 
+                 ' Temperature: ' + weather.temperature.main + '</br>' +
+                 'Clouds:'  + weather.clouds.main + ' ' +weather.clouds.description+'</br>' +
+                 'Wind: ' + weather.wind.speed + '</br>'
                  
                  );    
         
@@ -39,6 +41,10 @@
     Enter Location:
     <input type="text" id="location">
     <button onclick="begin()">Get Weather</button>
+</div>
+
+<div id="content">
+    
 </div>
 
 </body>
