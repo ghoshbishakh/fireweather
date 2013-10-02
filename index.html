@@ -10,12 +10,12 @@
 
 <script>
     function begin(){
-       getWeather();       
-    };
+       getWeather(document.getElementById('location').value);
+     };
     
     function refresh() {
         
-    $('h2').html('Location Name: ' + weather.location.name +  
+    $('h2').html('Location Name: ' + weather.location.name + '</br>' + 
                  ' Temperature: ' + weather.temperature.main
                  
                  );    
@@ -31,8 +31,15 @@
 
 <body>
 <h1>Weather App </h1>
-<h2>Click Get Weather</h2>    
-<button onclick="begin()">Get Weather</button>
+<h2>Click to Get Weather</h2>    
+
+
+
+<div>
+    Enter Location:
+    <input type="text" id="location">
+    <button onclick="begin()">Get Weather</button>
+</div>
 
 </body>
 </html>
