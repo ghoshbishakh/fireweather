@@ -14,11 +14,13 @@
      };
     
     function refresh() {
-        
+    var temp = weather.temperature.main;
+    var celsius = temp - 273;
+    celsius = celsius.toFixed(2);
     $("#content").html('Location Name: ' + weather.location.name + '</br>' + 
-                 ' Temperature: ' + weather.temperature.main + '</br>' +
-                 'Clouds:'  + weather.clouds.main + ' ' +weather.clouds.description+'</br>' +
-                 'Wind: ' + weather.wind.speed + '</br>'
+                 ' Temperature: ' + celsius + ' degree C </br>' +
+                 'Clouds: '  + weather.clouds.main + ' ' +weather.clouds.description+'</br>' +
+                 'Wind: ' + weather.wind.speed + ' m/s</br>'
                  
                  );    
         
