@@ -9,14 +9,45 @@
 <script type="text/javascript" src="handler.js"></script>
 
 <script>
-    function begin(){
-       getWeather(document.getElementById('location').value);
+    //Get data By Provided Location  
+    function manualLocation(){
+       getWeatherManual(document.getElementById('location').value); //function refresh() is called on success of parse() called by getWeather() 
      };
     
+    //Get data By Detected Location
+    function autoLocation(){
+        
+        //Get latitude and longitude
+        if(!navigator.geolocation){
+            alert("your browser does not support geo location");
+        }
+        else{
+            navigator.geolocation.getCurrentPosition(success, error);
+        }
+        
+        function success(position){
+            var lat = position.coords.latitude;
+            var lon = position.coords.longitude;
+            //get data
+            getWeatherAuto(lat,lon);    
+        }
+        
+        function error(error){
+            
+            alert('sorry an error occured' + error);
+            
+        }
+        
+    }
+    
+    
+    //Refresh Page
     function refresh() {
     var temp = weather.temperature.main;
     var celsius = temp - 273;
     celsius = celsius.toFixed(2);
+    
+    
     $("#content").html('Location Name: ' + weather.location.name + '</br>' + 
                  ' Temperature: ' + celsius + ' degree C </br>' +
                  'Clouds: '  + weather.clouds.main + ' ' +weather.clouds.description+'</br>' +
@@ -35,14 +66,19 @@
 
 <body>
 <h1>Weather App </h1>
-<h2>Click to Get Weather</h2>    
+<h2>Get Weather</h2>    
 
 
 
 <div>
     Enter Location:
     <input type="text" id="location">
-    <button onclick="begin()">Get Weather</button>
+    <button onclick="manualLocation()">Get Weather</button>
+</div>
+
+<div>
+    <h3>OR</h3>
+    <button onclick="autoLocation()">Get Weather Auto</button>
 </div>
 
 <div id="content">
