@@ -1,91 +1,79 @@
 <!DOCTYPE>
 <html>
+    <title>Weather</title>
+    
+    <head>
+        <link rel="stylesheet" type="text/css" href="main.css">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="handler.js"></script>
+        <script>
+            //Get data By Provided Location  
+            function manualLocation() {
+                getWeatherManual(document.getElementById('location').value); //function refresh() is called on success of parse() called by getWeather() 
+            };
 
-<title> Weather </title>
+            //Get data By Detected Location
+            function autoLocation() {
 
-<head>
-<link rel="stylesheet" type="text/css" href="main.css">    
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script type="text/javascript" src="handler.js"></script>
+                //Get latitude and longitude
+                if (!navigator.geolocation) {
+                    alert("your browser does not support geo location");
+                } else {
+                    navigator.geolocation.getCurrentPosition(success, error);
+                }
 
-<script>
-    //Get data By Provided Location  
-    function manualLocation(){
-       getWeatherManual(document.getElementById('location').value); //function refresh() is called on success of parse() called by getWeather() 
-     };
-    
-    //Get data By Detected Location
-    function autoLocation(){
-        
-        //Get latitude and longitude
-        if(!navigator.geolocation){
-            alert("your browser does not support geo location");
-        }
-        else{
-            navigator.geolocation.getCurrentPosition(success, error);
-        }
-        
-        function success(position){
-            var lat = position.coords.latitude;
-            var lon = position.coords.longitude;
-            //get data
-            getWeatherAuto(lat,lon);    
-        }
-        
-        function error(error){
-            
-            alert('sorry an error occured' + error);
-            
-        }
-        
-    }
-    
-    
-    //Refresh Page
-    function refresh() {
-    var temp = weather.temperature.main;
-    var celsius = temp - 273;
-    celsius = celsius.toFixed(2);
-    
-    
-    $("#content").html('Location Name: ' + weather.location.name + '</br>' + 
-                 ' Temperature: ' + celsius + ' degree C </br>' +
-                 'Clouds: '  + weather.clouds.main + ' ' +weather.clouds.description+'</br>' +
-                 'Wind: ' + weather.wind.speed + ' m/s</br>'
-                 
-                 );    
-        
-        
-    };
-    
-</script>
+                function success(position) {
+                    var lat = position.coords.latitude;
+                    var lon = position.coords.longitude;
+                    //get data
+                    getWeatherAuto(lat, lon);
+                }
 
-  
-</head>
+                function error(error) {
+
+                    alert('sorry an error occured' + error);
+
+                }
+
+            }
 
 
+            //Refresh Page
+            function refresh() {
+                var temp = weather.temperature.main;
+                var celsius = temp - 273;
+                celsius = celsius.toFixed(2);
+
+
+                $("#display").html('Location Name: ' + weather.location.name + '</br>' +
+                    ' Temperature: ' + celsius + ' degree C </br>' +
+                    'Clouds: ' + weather.clouds.main + ' ' + weather.clouds.description + '</br>' +
+                    'Wind: ' + weather.wind.speed + ' m/s</br>'
+
+                );
+
+
+            };
+        </script>
+    </head>
+    
 <body>
-<h1>Weather App </h1>
-<h2>Get Weather</h2>    
+    <div class="content">        
+            <div class="header">Weather App </div>
+                  
+            <h2>Get Weather</h2>
+            
+        <div>Enter Location:
+            <input type="text" id="location">
+            <button onclick="manualLocation()">Get Weather</button>
+        </div>
+        <div>
+             <h3>OR</h3>
 
-
-
-<div>
-    Enter Location:
-    <input type="text" id="location">
-    <button onclick="manualLocation()">Get Weather</button>
-</div>
-
-<div>
-    <h3>OR</h3>
-    <button onclick="autoLocation()">Get Weather Auto</button>
-</div>
-
-<div id="content">
-    
-</div>
-
+            <button onclick="autoLocation()">Get Weather Auto</button>
+        </div>
+        <div id="display"></div>
+    </div>
 </body>
+
 </html>
-
-

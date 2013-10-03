@@ -1,7 +1,38 @@
-#content {
-background: #D4EBF0;
-width: 96%;
-margin: 0 auto;
-font-size: 1.4em;
-margin-top: 2px;
+@font-face
+{
+font-family: walkway;
+src: url('font/Walkway_UltraBold.ttf');
+}
+
+
+body {
+    margin: 0px;
+    font-family: walkway;
+    }
+
+.header {
+    font-family: walkway;
+    font-size: 2em;
+    padding: 12px;
+    background: rgb(90, 97, 114);
+    color: rgb(224, 224, 224);
+}
+
+.content {
+    background: #D4EBF0;
+    width: 98%;
+    margin: 0 auto;
+    font-size: 1.2em;
+    margin-top: 0px;
+    padding: 12px;
+    height: auto;
+}
+
+#display {
+line-height: 1.4;
+font-size: 1.1em;
+margin-left: 2px;
+border-left: 2px solid #A9CA8A;
+padding-left: 8px;
+background: transparent;
 }

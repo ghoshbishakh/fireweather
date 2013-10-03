@@ -46,7 +46,7 @@
     
     
     
-	//Parse 
+	//Parse and call refresh
 	var response;
 
 	function parse(raw) {
