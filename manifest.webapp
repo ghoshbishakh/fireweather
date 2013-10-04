@@ -1,7 +1,7 @@
 {
   "name": "Weather app",
   "description": "open weather map api based client",
-  "launch_path": "/index.html",
+  "launch_path": "/ui1.html",
   "icons": {
     "128": "/img/icon-128.png"
   },

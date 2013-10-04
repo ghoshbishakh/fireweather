@@ -1,0 +1,91 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <title>Weather</title>    
+        <link rel="stylesheet" type="text/css" href="ui1.css">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="handler.js"></script>
+        
+        
+        <script>
+            autoLocation();       
+        
+            //Get data By Provided Location  
+            function manualLocation() {
+                getWeatherManual(document.getElementById('location').value); //function refresh() is called on success of parse() called by getWeather() 
+            };
+
+            //Get data By Detected Location
+            function autoLocation() {
+
+                //Get latitude and longitude
+                if (!navigator.geolocation) {
+                    alert("your browser does not support geo location");
+                } else {
+                    navigator.geolocation.getCurrentPosition(success, error);
+                }
+
+                function success(position) {
+                    var lat = position.coords.latitude;
+                    var lon = position.coords.longitude;
+                    //get data
+                    getWeatherAuto(lat, lon);
+                }
+
+                function error(error) {
+
+                    alert('sorry an error occured' + error);
+
+                }
+
+            }
+
+
+            //Refresh Page
+            function refresh() {
+                var temp = weather.temperature.max;
+                var celsius = temp - 273;
+                celsius = celsius.toFixed(0);
+                var wind = ((weather.wind.speed*3600)/1000);
+                wind = wind.toFixed(0);
+/*
+                $("#big").html('Location Name: ' + weather.location.name + '</br>' +
+                    ' Temperature: ' + celsius + ' degree C </br>' +
+                    'Clouds: ' + weather.clouds.main + ' ' + weather.clouds.description + '</br>' +
+                    'Wind: ' + weather.wind.speed + ' m/s</br>'
+
+                );
+*/
+
+            $("#big").html(celsius+"°");
+            $("#locationdisplay").html(weather.location.name);
+            $("#medium").html(weather.clouds.description);
+            $("#small").html("Wind: "+wind+"km/hr </br>Humidity: "+weather.humidity+"%");
+            
+            };
+        </script>
+    </head>
+
+    
+<body>
+    
+    <div class="content">
+        
+            <div class="upperbar">
+                <input type="text" id="location">
+                <button onclick="manualLocation()" id="getbutton">></button>
+                <div id="locationdisplay"></div>
+            </div>
+                  
+            <div id="main">
+                <div id="big"></div>
+                <div id="medium"></div>
+                <div id="small"></div>
+            </div>
+            
+         
+    </div>
+    
+</body>
+
+</html>

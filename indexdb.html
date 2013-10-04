@@ -1,0 +1,80 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <script type="text/javascript">
+        //Check For Compatibility
+        if(!window.indexedDB){
+            window.alert("Indexed DB not supported");
+        };
+        
+            
+ function adddata(){
+  
+  
+        //open request
+        var request = window.indexedDB.open("Settings",2);
+                   
+            
+            //On Error
+            request.onerror = function(event) {
+              alert("error occured on request" + request.errorCode);            
+            };
+            
+                        
+            //Checking and creating Object Store
+            
+            request.onupgradeneeded = function(event){
+              
+              var database = request.result;
+              
+              if(!database.objectStoreNames.contains("userSettings"))
+              {
+                database.createObjectStore("userSettings",{autoIncrement:true});
+                alert("created");           
+              };
+                     
+            };
+           
+           //On Success
+            
+            request.onsuccess = function(event) {
+            var db = request.result;
+            alert(db.objectStoreNames.contains("userSettings"));
+            
+            alert(db.objectStoreNames);
+            
+            var locationEntered = document.getElementById("input").value;
+            var transaction = db.transaction(["userSettings"], "readwrite");
+            var store = transaction.objectStore("userSettings");
+            var settings = {  
+              location: locationEntered
+              }
+            var save = store.add(settings);
+            save.onsuccess = function(event){
+              
+              alert("data saved" + event);
+            };
+             
+            
+            
+            };
+  
+  };
+ 
+        
+        </script>
+    </head>
+    
+    <body>
+        <p>
+            indexed DB test
+        </p>
+        <form>
+            Enter location
+            <input id="input" type="text"></input>
+                       
+        </form>
+        <button onclick="adddata()">submit</button>
+    </body>
+    
+</html>
