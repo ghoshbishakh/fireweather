@@ -17,7 +17,7 @@
 	//alert("http://api.openweathermap.org/data/2.5/find?q="+city+"&type=like");
 	$.ajax({
 	    type: "GET",
-	    url: "http://api.openweathermap.org/data/2.5/find?q=" + city + "&type=like",
+	    url: "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&type=like",
 	    success: function (data) {
 		raw = data;
 		//alert("worked!!");
@@ -33,7 +33,7 @@
         //alert("http://api.openweathermap.org/data/2.5/find?lat="+lat+"&lon="+lon);
         $.ajax({
 	    type: "GET",
-	    url: "http://api.openweathermap.org/data/2.5/find?lat="+lat+"&lon="+lon,
+	    url: "http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon,
 	    success: function (data) {
 		raw = data;
 		//alert("worked!!");
@@ -54,36 +54,36 @@
 	    weather = {
 
 		location: {
-		    lon: raw.list[0].coord.lon, //longitude
-		    lat: raw.list[0].coord.lat, //latitude
-		    name: raw.list[0].name, //name of location
-		    country: raw.list[0].sys.country, //country
-		    sunrise: raw.list[0].sys.sunrise, //sunrise
-		    sunset: raw.list[0].sys.sunset //sunset
+		    lon: raw.coord.lon, //longitude
+		    lat: raw.coord.lat, //latitude
+		    name: raw.name, //name of location
+		    country: raw.sys.country, //country
+		    sunrise: raw.sys.sunrise, //sunrise
+		    sunset: raw.sys.sunset //sunset
 		},
 
 
 
 		clouds: {
-		    main: raw.list[0].weather[0].main, //clouds and rain description
-		    description: raw.list[0].weather[0].description,
-		    cover: raw.list[0].clouds.all //cloud cover percentage
+		    main: raw.weather[0].main, //clouds and rain description
+		    description: raw.weather[0].description,
+		    cover: raw.clouds.all //cloud cover percentage
 		},
 
 		temperature: {
-		    main: raw.list[0].main.temp, //current temperature
-		    min: raw.list[0].main.temp_min, //minimum tmp
-		    max: raw.list[0].main.temp_max //max tmp
+		    main: raw.main.temp, //current temperature
+		    min: raw.main.temp_min, //minimum tmp
+		    max: raw.main.temp_max //max tmp
 
 		},
 
 		wind: {
-		    speed: raw.list[0].wind.speed, //speed
-		    direction: raw.list[0].wind.deg //direction
+		    speed: raw.wind.speed, //speed
+		    direction: raw.wind.deg //direction
 		},
 
-		humidity: raw.list[0].main.humidity,
-		pressure: raw.list[0].main.pressure
+		humidity: raw.main.humidity,
+		pressure: raw.main.pressure
 	    }
 
 	    refresh();
