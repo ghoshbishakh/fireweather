@@ -1,5 +1,5 @@
 fireweather
 ===========
 
-Open Weather app fore Firefox OS
+Open Weather app for Firefox OS
 uses API from http://openweathermap.org/
